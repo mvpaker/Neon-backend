@@ -73,10 +73,10 @@ app.use(function (req, res, next) {
 app.use("/neon", neonRouter);
 
 // Home page
-app.use(express.static(path.join(__dirname, "../client/build")));
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../client/build/index.html"));
-});
+// app.use(express.static(path.join(__dirname, "../client/build")));
+// app.get("*", (req, res) => {
+//     res.sendFile(path.join(__dirname, "../client/build/index.html"));
+// });
 // Start App
 app.listen(PORT, () => {
     console.log(`server started on PORT ${PORT}`);
