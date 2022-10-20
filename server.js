@@ -23,37 +23,30 @@ const PORT = process.env["PORT"] || 5000;
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(
-    cors({
-        origin: [
-            process.env["FRONT_URL"]
-        ],
-        credentials: true
-    })
-);
+app.use(cors({ origin: '*' }));
 
 
-app.use(function (req, res, next) {
+// app.use(function (req, res, next) {
 
-    if (
-        req.headers &&
-        req.headers.authorization &&
-        req.headers.authorization.split(' ')[0] === 'EventTracker'
+//     if (
+//         req.headers &&
+//         req.headers.authorization &&
+//         req.headers.authorization.split(' ')[0] === 'EventTracker'
 
-    ) {
+//     ) {
 
-        const token = req.headers.authorization.split(' ')[1]
+//         const token = req.headers.authorization.split(' ')[1]
 
-        jwt.verify(token, process.env["JWT_SECRET"], function (err, decode) {
-            if (err) req.user = undefined
-            req.user = decode
-            next()
-        })
-    } else {
-        req.user = undefined
-        next()
-    }
-})
+//         jwt.verify(token, process.env["JWT_SECRET"], function (err, decode) {
+//             if (err) req.user = undefined
+//             req.user = decode
+//             next()
+//         })
+//     } else {
+//         req.user = undefined
+//         next()
+//     }
+// })
 // Mongo Setup
 // mongoose.connect(
 //     process.env["MONGO_URI"],
@@ -73,10 +66,10 @@ app.use(function (req, res, next) {
 app.use("/neon", neonRouter);
 
 // Home page
-app.use(express.static(path.join(__dirname, "../client/build")));
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../client/build/index.html"));
-});
+// app.use(express.static(path.join(__dirname, "../client/build")));
+// app.get("*", (req, res) => {
+//     res.sendFile(path.join(__dirname, "../client/build/index.html"));
+// });
 // Start App
 app.listen(PORT, () => {
     console.log(`server started on PORT ${PORT}`);
