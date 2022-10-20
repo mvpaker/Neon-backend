@@ -25,7 +25,10 @@ app.use(cookieParser());
 
 app.use(
     cors({
-        origin: '*'
+        origin: [
+            'https://neon-l.com'
+        ],
+        credentials: true
     })
 );
 
