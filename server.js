@@ -33,27 +33,27 @@ app.use(
 );
 
 
-app.use(function (req, res, next) {
+// app.use(function (req, res, next) {
 
-    if (
-        req.headers &&
-        req.headers.authorization &&
-        req.headers.authorization.split(' ')[0] === 'EventTracker'
+//     if (
+//         req.headers &&
+//         req.headers.authorization &&
+//         req.headers.authorization.split(' ')[0] === 'EventTracker'
 
-    ) {
+//     ) {
 
-        const token = req.headers.authorization.split(' ')[1]
+//         const token = req.headers.authorization.split(' ')[1]
 
-        jwt.verify(token, process.env["JWT_SECRET"], function (err, decode) {
-            if (err) req.user = undefined
-            req.user = decode
-            next()
-        })
-    } else {
-        req.user = undefined
-        next()
-    }
-})
+//         jwt.verify(token, process.env["JWT_SECRET"], function (err, decode) {
+//             if (err) req.user = undefined
+//             req.user = decode
+//             next()
+//         })
+//     } else {
+//         req.user = undefined
+//         next()
+//     }
+// })
 // Mongo Setup
 // mongoose.connect(
 //     process.env["MONGO_URI"],
