@@ -1,76 +1,27 @@
-import express from "express";
-import mongoose from "mongoose";
-import cookieParser from "cookie-parser";
-import cors from "cors";
-// import authRouter from "./routers/authRouter.js";
-// import accountRouter from "./routers/accountRouter.js";
-import neonRouter from "./routers/neon.js";
-import path from "path";
-import "dotenv/config";
-import jwt from "jsonwebtoken";
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-
-// 👇️ "/home/john/Desktop/javascript"
-const __dirname = path.dirname(__filename);
-console.log('directory-name', __filename, __dirname);
-// Server Configuration
+import express from 'express';
 const app = express();
 
-const PORT = process.env["PORT"] || 5000;
+import http from 'http';
+const httpServer = http.createServer(app);
+import dotenv from 'dotenv';
 
-app.use(express.json());
-app.use(cookieParser());
+import cors from 'cors';
+
+dotenv.config();
 
 app.use(cors({ origin: '*' }));
+app.use(express.json({ limit: "50mb", extended: true }));
+app.use(express.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }));
 
 
-// app.use(function (req, res, next) {
+app.get('/', (req, res) => {
+    res.send("I am here")
+});
 
-//     if (
-//         req.headers &&
-//         req.headers.authorization &&
-//         req.headers.authorization.split(' ')[0] === 'EventTracker'
+import neonRouter from './routers/neon.js';
 
-//     ) {
+app.use('/neon', neonRouter);
 
-//         const token = req.headers.authorization.split(' ')[1]
+httpServer.listen(process.env.PORT || 9002, () => {
 
-//         jwt.verify(token, process.env["JWT_SECRET"], function (err, decode) {
-//             if (err) req.user = undefined
-//             req.user = decode
-//             next()
-//         })
-//     } else {
-//         req.user = undefined
-//         next()
-//     }
-// })
-// Mongo Setup
-// mongoose.connect(
-//     process.env["MONGO_URI"],
-//     {
-//         useNewUrlParser: true,
-//         useUnifiedTopology: true
-//     },
-//     (err) => {
-//         if (err) console.error(err);
-//         console.log("Database connected");
-//     }
-// );
-
-// Setup Routes
-//app.use("/auth", authRouter);
-//app.use("/account", accountRouter);
-app.use("/neon", neonRouter);
-
-// Home page
-// app.use(express.static(path.join(__dirname, "../client/build")));
-// app.get("*", (req, res) => {
-//     res.sendFile(path.join(__dirname, "../client/build/index.html"));
-// });
-// Start App
-app.listen(PORT, () => {
-    console.log(`server started on PORT ${PORT}`);
 });
