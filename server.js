@@ -2,8 +2,9 @@ import express from "express";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import authRouter from "./routers/authRouter.js";
-import accountRouter from "./routers/accountRouter.js";
+// import authRouter from "./routers/authRouter.js";
+// import accountRouter from "./routers/accountRouter.js";
+import neonRouter from "./routers/neon.js";
 import path from "path";
 import "dotenv/config";
 import jwt from "jsonwebtoken";
@@ -54,21 +55,22 @@ app.use(function (req, res, next) {
     }
 })
 // Mongo Setup
-mongoose.connect(
-    process.env["MONGO_URI"],
-    {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    },
-    (err) => {
-        if (err) console.error(err);
-        console.log("Database connected");
-    }
-);
+// mongoose.connect(
+//     process.env["MONGO_URI"],
+//     {
+//         useNewUrlParser: true,
+//         useUnifiedTopology: true
+//     },
+//     (err) => {
+//         if (err) console.error(err);
+//         console.log("Database connected");
+//     }
+// );
 
 // Setup Routes
-app.use("/auth", authRouter);
-app.use("/account", accountRouter);
+//app.use("/auth", authRouter);
+//app.use("/account", accountRouter);
+app.use("/neon", neonRouter);
 
 // Home page
 app.use(express.static(path.join(__dirname, "../client/build")));
