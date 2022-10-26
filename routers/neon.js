@@ -17,7 +17,7 @@ router.post("/neon-data", async (req, res) => {
 
     if (type === "customer") {
         var subject = "Received New Customer Data";
-        var phone = req.body.number;
+        var phone = req.body.phone;
         var name = req.body.name;
         var email = req.body.email;
         var company = req.body.company;
