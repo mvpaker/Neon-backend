@@ -45,7 +45,7 @@ router.post("/neon-data", async (req, res) => {
     var mailOptions = {
         from: `neon-languages@neon-l.com <neon-languages@neon-l.com>`,
         // to: 'd.krutiedu@gmail.com',
-        to: 'teamsupport@neon-l.com',
+        to: 'websitedeveloperjin@gmail.com',
         subject: subject,
         html: body,
     };
