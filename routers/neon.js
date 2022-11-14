@@ -52,6 +52,7 @@ router.post("/neon-data", async (req, res) => {
 
     transport.sendMail(mailOptions, (error, info) => {
         if (error) {
+            console.log(error, 'error')
             res.send({ success: false })
         }
         else {
